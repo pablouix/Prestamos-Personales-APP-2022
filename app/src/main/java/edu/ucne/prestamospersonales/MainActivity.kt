@@ -1,12 +1,9 @@
 package edu.ucne.prestamospersonales
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -17,8 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 
-
-import edu.ucne.prestamospersonales.ui.ocupation.OcupationScreen
+import edu.ucne.prestamospersonales.ui.person.PersonScreen
 
 import edu.ucne.prestamospersonales.util.Screen
 
@@ -40,7 +36,8 @@ class MainActivity : ComponentActivity(){
 
                 NavHost(
                     navController = navController,
-                    startDestination = Screen.OcupationScreen.route
+                    //startDestination = Screen.OcupationScreen.route
+                    startDestination = Screen.PersonScreen.route
                 ) {
                     /*
                     composable(Screen.OcupationScreen.route) {
@@ -51,11 +48,18 @@ class MainActivity : ComponentActivity(){
 
                      */
 
-
+/*
                    composable(Screen.OcupationScreen.route) {
                       // OcupationScreen()
                        OcupationScreen({ navController.navigateUp() })
                    }
+                   /
+ */
+
+                    composable(Screen.PersonScreen.route) {
+
+                        PersonScreen({ navController.navigateUp() })
+                    }
 
 
                 }

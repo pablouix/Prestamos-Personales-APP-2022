@@ -20,7 +20,6 @@ interface OcupationDao { //suspend fun insertOcupation(ocupation:Ocupation)
     @Query("SELECT * FROM Ocupations WHERE ocupacionId = :id")
     fun getOcupation(id: Int) : Flow<Ocupation>
 
-
     @Query("Select * from Ocupations")
     fun getAll(): Flow<List<Ocupation>>
 }
