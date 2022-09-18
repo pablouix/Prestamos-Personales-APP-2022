@@ -14,22 +14,12 @@ class PersonRepository @Inject constructor(
         db.personDao.insert(person)
     }
 
-    suspend fun update(person: Person)
-    {
-        db.personDao.update(person)
-    }
-
-
-
     suspend fun delete(person: Person)
     {
         db.personDao.delete(person)
     }
 
-    fun getPerson(id: Int) = db.personDao.getPerson(id)
+    fun getPerson(id: Int) = db.personDao.find(id)
 
     fun getAll() = db.personDao.getAll()
-
-
-
 }

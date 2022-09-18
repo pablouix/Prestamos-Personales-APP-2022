@@ -8,17 +8,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface OcupationDao { //suspend fun insertOcupation(ocupation:Ocupation)
 
-    @Insert
-    suspend fun insertOcupation(ocupation: Ocupation)
-
-    @Update
-    suspend fun updateOcupation(ocupation: Ocupation)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(ocupation: Ocupation)
 
     @Delete
-    suspend fun deleteOcupation(ocupation: Ocupation)
+    suspend fun delete(ocupation: Ocupation)
 
-    @Query("SELECT * FROM Ocupations WHERE ocupacionId = :id")
-    fun getOcupation(id: Int) : Flow<Ocupation>
+    @Query("SELECT * " +
+            "FROM Ocupations " +
+            "WHERE ocupacionId = :ocupationId " +
+            "LIMIT 1")
+    fun find(ocupationId: Int) :Ocupation
 
     @Query("Select * from Ocupations")
     fun getAll(): Flow<List<Ocupation>>

@@ -271,6 +271,8 @@ fun PersonScreen(
               },
             label = { Text(text = "Selecciona ocupacion") },
             isError = selectOcupacionError,
+
+            //trailingIcon
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.ArrowDropDown,

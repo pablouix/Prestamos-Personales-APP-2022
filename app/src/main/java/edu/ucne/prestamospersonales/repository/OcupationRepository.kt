@@ -10,23 +10,15 @@ class OcupationRepository @Inject constructor(
 
     suspend fun insertOcupation(ocupation: Ocupation)
     {
-        db.ocuparionDao.insertOcupation(ocupation)
-    }
-
-    suspend fun updateOcupation(ocupation: Ocupation)
-    {
-        db.ocuparionDao.updateOcupation(ocupation)
+        db.ocuparionDao.insert(ocupation)
     }
 
     suspend fun deleteOcupation(ocupation: Ocupation)
     {
-        db.ocuparionDao.deleteOcupation(ocupation)
+        db.ocuparionDao.delete(ocupation)
     }
 
-    fun getOcupation(id: Int) = db.ocuparionDao.getOcupation(id)
+    fun getOcupation(id: Int) = db.ocuparionDao.find(id)
 
     fun getAll() = db.ocuparionDao.getAll()
-
-
-
 }
