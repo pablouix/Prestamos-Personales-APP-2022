@@ -13,7 +13,7 @@ import edu.ucne.prestamospersonales.model.Prestamo
 
 @Database(
     entities = [Ocupation::class, Person::class, Prestamo::class],
-    version = 5
+    version = 7
 )
 abstract class AppDataBase : RoomDatabase(){
     abstract val ocuparionDao : OcupationDao

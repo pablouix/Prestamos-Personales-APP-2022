@@ -296,10 +296,10 @@ fun PrestamoScreen(
                 {
                     conceptoError = viewModel.concepto.isBlank()
                 }
-                else if (viewModel.balance>0)
-                {
-                    balanceError = viewModel.balance.isFinite()
-                }
+               // else if (viewModel.balance<0)
+              //  {
+                 //   balanceError = viewModel.balance<0
+               // }
                 else {
                     viewModel.Save()
                     onNavigateBack()
