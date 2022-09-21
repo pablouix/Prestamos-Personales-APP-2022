@@ -28,9 +28,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import edu.ucne.prestamospersonales.R
 import edu.ucne.prestamospersonales.model.Ocupation
+import edu.ucne.prestamospersonales.model.Person
+import edu.ucne.prestamospersonales.model.Prestamo
 import edu.ucne.prestamospersonales.ui.ocupation.OcupationViewModel
 import java.util.*
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,6 +48,7 @@ fun PersonScreen(
     var direccionError by remember { mutableStateOf(false) }
     var fechaError by remember { mutableStateOf(false) }
     var selectOcupacionError by remember { mutableStateOf(false) }
+    var balanceError by remember { mutableStateOf(false) }
 
 
     //obtener fecha inicio
@@ -77,11 +79,11 @@ fun PersonScreen(
     var ocupacionselected by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val ocupaciones = listOf(
-        Ocupation(1, "Ingniero", "60000"),
-        Ocupation(2, "Agricultor", "50000"),
-        Ocupation(3, "Pintor", "40000"),
-        Ocupation(4, "Maestro", "60000"),
-        Ocupation(5, "Doctor", "70000")
+        Ocupation(1, "Ingniero", 60000.00),
+        Ocupation(2, "Agricultor", 50000.00),
+        Ocupation(3, "Pintor", 40000.00),
+        Ocupation(4, "Maestro", 60000.00),
+        Ocupation(5, "Doctor", 70000.00)
 
     )
 
@@ -91,7 +93,10 @@ fun PersonScreen(
     Campos: PersonaId, Nombres,Telefono, Celular, Email, Direccion, FechaNacimiento, OcupacionId
      */
 
-    Column(modifier = Modifier.padding(8.dp)) {
+    Column( modifier = Modifier
+        .padding(8.dp)
+        .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally) {
         //titulo
         Text(
             text = "Registro de personas",
@@ -244,7 +249,7 @@ fun PersonScreen(
             readOnly = true,
             isError = fechaError,
 
-            leadingIcon = {
+            trailingIcon = {
                 IconButton(onClick = { datePickerDialogo.show() }) {
                     Icon(
 
@@ -273,7 +278,7 @@ fun PersonScreen(
             isError = selectOcupacionError,
 
             //trailingIcon
-            leadingIcon = {
+            trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.ArrowDropDown,
                     contentDescription = "Botón para elegir fecha"
@@ -317,6 +322,31 @@ fun PersonScreen(
             )
         }
 
+        OutlinedTextField(
+            value = viewModel.balance.toString(),
+            onValueChange = {
+                viewModel.balance = it.toDouble()
+                balanceError = false},
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text(text = "Balance") },
+            placeholder = { Text(text = "Digita tu balance") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+            isError = balanceError
+        )
+
+        if (balanceError) {
+            Text(
+                text = "Balance es obligatorio",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+
+
+
+
+
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
@@ -340,8 +370,13 @@ fun PersonScreen(
                 {
                     selectOcupacionError = ocupacionselected.isBlank()
                 }
+                else if (viewModel.balance.isNaN())
+                {
+                    balanceError = viewModel.balance.isNaN()
+                }
                 else {
                     viewModel.Save()
+                    onNavigateBack()
                 }
             },
             modifier = Modifier
@@ -349,10 +384,7 @@ fun PersonScreen(
                 .height(50.dp)
         ) {
 
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = null
-            )
+            Icon(painter = painterResource(R.drawable.save_white_24dp), contentDescription = null )
             Spacer(modifier = Modifier.width(4.dp))
             Text(text = "Guardar", fontSize = 16.sp)
         }

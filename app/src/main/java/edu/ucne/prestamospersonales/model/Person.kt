@@ -15,5 +15,6 @@ data class Person(
     val email: String = "",
     val direccion: String ="",
     val fechaNacimiento: String = "",
-    val ocupacionId: Int = 0
+    val ocupacionId: Int = 0,
+    val balance: Double = 0.0
 )

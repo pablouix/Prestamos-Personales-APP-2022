@@ -6,15 +6,18 @@ import edu.ucne.prestamospersonales.model.Ocupation
 
 import edu.ucne.prestamospersonales.data.dao.OcupationDao
 import edu.ucne.prestamospersonales.data.dao.PersonDao
+import edu.ucne.prestamospersonales.data.dao.PrestamoDao
 import edu.ucne.prestamospersonales.model.Person
+import edu.ucne.prestamospersonales.model.Prestamo
 
 
 @Database(
-    entities = [Ocupation::class, Person::class],
-    version = 4
+    entities = [Ocupation::class, Person::class, Prestamo::class],
+    version = 5
 )
 abstract class AppDataBase : RoomDatabase(){
     abstract val ocuparionDao : OcupationDao
     abstract val personDao : PersonDao
+    abstract val prestamoDao: PrestamoDao
 
 }

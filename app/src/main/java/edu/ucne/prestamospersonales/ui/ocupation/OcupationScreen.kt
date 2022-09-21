@@ -31,24 +31,13 @@ fun OcupationScreen(
     viewModel: OcupationViewModel = hiltViewModel()
 ) {
 
+    var descripcionError by remember { mutableStateOf(false) }
+    var salarioError by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(title = { Text("Registro de ocupaciones") })
         },
-
-        /*
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                viewModel.Save()
-                onNavigateBack()
-            }) {
-                Icon(imageVector = Icons.Default.Create, contentDescription = "Add a Ocupation")
-            }
-        }
-
-         */
-
-
     ) {
         Column(
             modifier = Modifier
@@ -59,36 +48,73 @@ fun OcupationScreen(
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Descripcion")  },
+                label = { Text(text = "Descripcion") },
                 placeholder = { Text("Digita la ocupacion") },
                 maxLines = 3,
                 value = viewModel.descripcion,
-                onValueChange = { viewModel.descripcion = it })
+                onValueChange = {
+                    viewModel.descripcion = it
+                    descripcionError = false
+                },
+                isError = descripcionError
+            )
+            if (descripcionError) {
+                Text(
+                    text = "Descripcion es obligatorio",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
 
             OutlinedTextField(
 
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(text = "Salario") },
                 placeholder = { Text("Digita el salario") },
-                value = viewModel.salario,
-                onValueChange = { viewModel.salario = it},
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-
-
+                value = viewModel.salario.toString(),
+                onValueChange = {
+                    viewModel.salario = it.toString().toDouble()
+                    salarioError = false
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                isError = salarioError
             )
+
+            if (salarioError) {
+                Text(
+                    text = "Salario es obligatorio",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+
 
             Spacer(modifier = Modifier.height(20.dp))
 
 
             Button(
-                onClick = {  viewModel.Save() }, modifier =
+                onClick = {
+                    if (viewModel.descripcion.isBlank())
+                        descripcionError = viewModel.descripcion.isBlank()
+                    else if (viewModel.salario.toString().isBlank())
+                        salarioError = viewModel.salario.toString().isBlank()
+                    else {
+                        viewModel.Save()
+                        onNavigateBack()
+                    }
+                }, modifier =
                 Modifier
                     .fillMaxWidth()
                     .height(50.dp)
 
             ) {
 
-                Icon(painter = painterResource(R.drawable.save_white_24dp), contentDescription = null )
+                Icon(
+                    painter = painterResource(R.drawable.save_white_24dp),
+                    contentDescription = null
+                )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(text = "Guardar", fontSize = 16.sp)
             }
@@ -96,13 +122,11 @@ fun OcupationScreen(
             Text(text = "")
 
 
-
-           
-
         }
     }
 
 }
+
 /*
 @Composable
 @Preview(showSystemUi = true)

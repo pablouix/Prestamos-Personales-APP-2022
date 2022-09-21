@@ -18,7 +18,7 @@ class OcupationViewModel @Inject() constructor(
 ) : ViewModel(){
 
     var descripcion by mutableStateOf("")
-    var salario by mutableStateOf("")
+    var salario by mutableStateOf(0.0)
 
 
     fun Save()

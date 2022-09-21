@@ -12,9 +12,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import edu.ucne.prestamospersonales.ui.ocupation.OcupationScreen
 
 
 import edu.ucne.prestamospersonales.ui.person.PersonScreen
+import edu.ucne.prestamospersonales.ui.prestamo.PrestamoScreen
+import edu.ucne.prestamospersonales.ui.prestamo_list.PrestamoListScreen
 
 import edu.ucne.prestamospersonales.util.Screen
 
@@ -36,41 +39,39 @@ class MainActivity : ComponentActivity(){
 
                 NavHost(
                     navController = navController,
-                    //startDestination = Screen.OcupationScreen.route
-                    startDestination = Screen.PersonScreen.route
+
+                    startDestination = Screen.MenuPrincipal.route
                 ) {
-                    /*
-                    composable(Screen.OcupationScreen.route) {
-                        StudentListScreen(
-                            onClick = { navController.navigate(Screen.OcupationScreen.route) }
+                    composable(Screen.MenuPrincipal.route){
+                        MenuPrincipal(
+                            onClickOcupationR = {navController.navigate(Screen.OcupationScreen.route)},
+                            onClickPersonR = {navController.navigate(Screen.PersonScreen.route)},
+                            onClickPrestamoR = { navController.navigate(Screen.PrestamoScreen.route) },
+                            onClickPrestamoL = { navController.navigate(Screen.PrestamoListScreen.route) }
                         )
                     }
 
-                     */
 
-/*
-                   composable(Screen.OcupationScreen.route) {
-                      // OcupationScreen()
-                       OcupationScreen({ navController.navigateUp() })
-                   }
-                   /
- */
+                    composable(Screen.OcupationScreen.route){
+                        OcupationScreen({navController.navigateUp()})
+                    }
 
-                    composable(Screen.PersonScreen.route) {
+                    composable(Screen.PersonScreen.route){
+                        PersonScreen({navController.navigateUp()})
+                    }
 
-                        PersonScreen({ navController.navigateUp() })
+                    composable(Screen.PrestamoScreen.route){
+                        PrestamoScreen({navController.navigateUp()})
+                    }
+                    composable(Screen.PrestamoListScreen.route){
+                        PrestamoListScreen({navController.navigateUp()})
                     }
 
 
+
+
                 }
-
-
-
-
             }
-
-
-           // val sendButton = findViewById<Button>()
         }
     }
 }
