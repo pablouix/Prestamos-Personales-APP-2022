@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
+/*
     @Singleton
     @Provides
     fun providesDatabase(@ApplicationContext context: Context) : AppDataBase
@@ -27,6 +27,12 @@ object AppModule {
         ).fallbackToDestructiveMigration().build()
     }
 
-
-
+ */
+@Singleton
+@Provides
+fun provide(@ApplicationContext context: Context) : AppDataBase =
+    Room.databaseBuilder(context,
+        AppDataBase::class.java,
+        "SpellingDb")
+        .fallbackToDestructiveMigration().build()
 }
