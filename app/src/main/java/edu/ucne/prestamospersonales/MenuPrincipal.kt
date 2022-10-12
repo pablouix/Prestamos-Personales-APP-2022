@@ -23,7 +23,8 @@ fun MenuPrincipal(
     onClickOcupationR: () -> Unit,
     onClickPersonR: () -> Unit,
     onClickPrestamoR: () -> Unit,
-    onClickPrestamoL: () -> Unit
+    onClickPrestamoL: () -> Unit,
+    onClickPrestamoA: () -> Unit
 
 ){
     Column(
@@ -157,6 +158,36 @@ fun MenuPrincipal(
 
             Button(
                 onClick = onClickPrestamoL, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp, 0.dp)
+            ) {
+                Text(text = "Entrar")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Card(
+            modifier = Modifier
+                .height(100.dp)
+                .fillMaxWidth()
+                .background(color = Color.White)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(10.dp, 0.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ShoppingCart, contentDescription = "Add a Ocupacione",
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(50.dp)
+                )
+                Text(text = "API ARTICULOS", fontSize = 20.sp)
+            }
+
+            Button(
+                onClick = onClickPrestamoA, modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp, 0.dp)
             ) {

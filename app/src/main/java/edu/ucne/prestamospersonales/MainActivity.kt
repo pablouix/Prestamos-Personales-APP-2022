@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import edu.ucne.prestamospersonales.ui.articulos_list.ArticuloListScreen
 import edu.ucne.prestamospersonales.ui.ocupation.OcupationScreen
 import edu.ucne.prestamospersonales.ui.person.PersonScreen
 import edu.ucne.prestamospersonales.ui.prestamo.PrestamoScreen
@@ -36,6 +37,10 @@ import edu.ucne.prestamospersonales.util.Screen
 @AndroidEntryPoint
 class MainActivity : ComponentActivity(){
     //  private lateinit var buttonsave: Button
+
+   // private lateinit var binding:ActivityMainBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +64,8 @@ class MainActivity : ComponentActivity(){
                             onClickOcupationR = {navController.navigate(Screen.OcupationScreen.route)},
                             onClickPersonR = {navController.navigate(Screen.PersonScreen.route)},
                             onClickPrestamoR = { navController.navigate(Screen.PrestamoScreen.route) },
-                            onClickPrestamoL = { navController.navigate(Screen.PrestamoListScreen.route) }
+                            onClickPrestamoL = { navController.navigate(Screen.PrestamoListScreen.route) },
+                            onClickPrestamoA = { navController.navigate(Screen.ArticuloListScreen.route) }
                         )
                     }
 
@@ -77,6 +83,11 @@ class MainActivity : ComponentActivity(){
                     }
                     composable(Screen.PrestamoListScreen.route){
                         PrestamoListScreen({navController.navigateUp()})
+                    }
+
+
+                    composable(Screen.ArticuloListScreen.route){
+                        ArticuloListScreen({navController.navigateUp()})
                     }
 
 
