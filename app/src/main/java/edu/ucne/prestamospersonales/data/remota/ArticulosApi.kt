@@ -6,6 +6,8 @@ import retrofit2.http.GET
 
 interface ArticulosApi
 {
+
+    // suspend fun getArticulos(): Response<List<ArticuloResponse>>
     @GET("api/Articulos")
-    suspend fun get(): Response<List<ArticuloResponse>>
+    suspend fun getArticulos(): List<ArticuloResponse>
 }

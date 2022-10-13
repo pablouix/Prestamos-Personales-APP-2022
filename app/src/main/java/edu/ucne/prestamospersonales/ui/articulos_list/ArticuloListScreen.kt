@@ -40,7 +40,7 @@ fun ArticuloListScreen(
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        val uiState by viewModel.uiState.collectAsState()
+        val uiState by viewModel._uiState.collectAsState()
 
 
         Column(modifier = Modifier
@@ -87,7 +87,7 @@ fun PrestamoRow(viewModel: ArticuloListViewModel, articulo: ArticuloResponse, on
 
     ) {
         Text(
-            text = articulo.ariticuloId.toString(),
+            text = articulo.articuloId.toString(),
             style = MaterialTheme.typography.titleLarge
         )
         Column() {

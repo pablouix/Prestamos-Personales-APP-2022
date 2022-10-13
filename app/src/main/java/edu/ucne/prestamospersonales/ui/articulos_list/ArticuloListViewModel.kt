@@ -23,13 +23,34 @@ class ArticuloListViewModel @Inject constructor(
     val repository: ApiArticuloRepository
 ) : ViewModel(){
 
-    private val _uiState = MutableStateFlow(ArticuloListUiState())
-    val uiState: StateFlow<ArticuloListUiState> = _uiState.asStateFlow()
+    var _uiState = MutableStateFlow(ArticuloListUiState())
+    //var uiState: StateFlow<ArticuloListUiState> = _uiState.asStateFlow()
+
+ /*   init {
+        viewModelScope.launch {
+            _uiState.getAndUpdate {
+                it.copy(articulos = repository.getArticulos().sortedBy { it.articuloId })
+            }
+        }
+    }
+    */
 
     init {
         viewModelScope.launch {
-            _uiState.getAndUpdate {
-                it.copy(articulos = repository.get().sortedBy { it.ariticuloId })
+           var list = repository.getArticulos()
+            _uiState.update {
+                it.copy(
+                    articulos = list.map {
+                    articuloResponse ->
+                    //estamos creando una lista
+                    ArticuloResponse(
+                        articuloId = articuloResponse.articuloId,
+                        descripcion = articuloResponse.descripcion,
+                        marca = articuloResponse.marca,
+                        precio = articuloResponse.precio,
+                        existencia = articuloResponse.existencia
+                    )
+                })
             }
         }
     }

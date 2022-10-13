@@ -1,7 +1,11 @@
 package edu.ucne.prestamospersonales.data.remota.dto
 
+import com.squareup.moshi.Json
+
 data class ArticuloResponse(
-    val ariticuloId: Int = 0,
+// esto es de moshi
+    @Json(name = "ariticuloId")
+    val articuloId: Int = 0,
     val descripcion: String = "",
     val marca: String = "",
     val precio: Double = 0.0,

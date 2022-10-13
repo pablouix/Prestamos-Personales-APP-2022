@@ -10,14 +10,18 @@ class ApiArticuloRepository @Inject constructor(
     private val api: ArticulosApi
 )
 {
-    suspend fun get(): List<ArticuloResponse>
-    {
-        return withContext(Dispatchers.IO)
-        {
-            val response = api.get()
-            response.body()?: emptyList()
-        }
+    //descargar todos los que ya estan subidos
 
-    }
+    suspend fun getArticulos() = api.getArticulos()
+//    suspend fun getArticulos(): List<ArticuloResponse>
+//    {
+//        return withContext(Dispatchers.IO)
+//        {
+//            val response = api.getArticulos()
+//            response.body()?: emptyList()
+//        }
+//
+//
+//    }
 
 }

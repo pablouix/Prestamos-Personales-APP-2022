@@ -55,12 +55,12 @@ object AppModule {
             .build()
     }
 
-    @Singleton
+    @Singleton //que va adevolver uno solo...
     @Provides
     fun provideSagApi(moshi: Moshi): ArticulosApi {
         return Retrofit.Builder()
-            .baseUrl("http://http://www.apipablo.somee.com/")
-             .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .baseUrl("http://www.apipablo.somee.com/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(ArticulosApi::class.java)
     }
