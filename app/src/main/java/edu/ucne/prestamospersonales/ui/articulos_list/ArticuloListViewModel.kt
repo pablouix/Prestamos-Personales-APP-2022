@@ -3,6 +3,7 @@ package edu.ucne.prestamospersonales.ui.articulos_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import edu.ucne.prestamospersonales.data.remota.ArticulosApi
 import edu.ucne.prestamospersonales.data.remota.dto.ArticuloResponse
 import edu.ucne.prestamospersonales.model.Prestamo
 import edu.ucne.prestamospersonales.repository.ApiArticuloRepository
@@ -52,6 +53,14 @@ class ArticuloListViewModel @Inject constructor(
                     )
                 })
             }
+        }
+    }
+
+
+    fun deleteArticulos(articuloResponse: ArticuloResponse)
+    {
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteArticulos(articuloResponse.articuloId)
         }
     }
 }

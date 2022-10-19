@@ -13,6 +13,12 @@ class ApiArticuloRepository @Inject constructor(
     //descargar todos los que ya estan subidos
 
     suspend fun getArticulos() = api.getArticulos()
+
+    suspend fun deleteArticulos(id: Int) = api.DeleteArticulos(id)
+
+    suspend fun saveArticulos(response: ArticuloResponse) = api.InsertArticulos(response)
+
+
 //    suspend fun getArticulos(): List<ArticuloResponse>
 //    {
 //        return withContext(Dispatchers.IO)

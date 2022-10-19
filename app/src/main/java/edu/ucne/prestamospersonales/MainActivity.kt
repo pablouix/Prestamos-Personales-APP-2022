@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import edu.ucne.prestamospersonales.ui.articulos.ArticuloScreen
 import edu.ucne.prestamospersonales.ui.articulos_list.ArticuloListScreen
 import edu.ucne.prestamospersonales.ui.ocupation.OcupationScreen
 import edu.ucne.prestamospersonales.ui.person.PersonScreen
@@ -65,7 +66,8 @@ class MainActivity : ComponentActivity(){
                             onClickPersonR = {navController.navigate(Screen.PersonScreen.route)},
                             onClickPrestamoR = { navController.navigate(Screen.PrestamoScreen.route) },
                             onClickPrestamoL = { navController.navigate(Screen.PrestamoListScreen.route) },
-                            onClickPrestamoA = { navController.navigate(Screen.ArticuloListScreen.route) }
+                            onClickPrestamoA = { navController.navigate(Screen.ArticuloListScreen.route) },
+                            onClickPrestamoAR = { navController.navigate(Screen.ArticuloScreen.route) }
                         )
                     }
 
@@ -88,6 +90,10 @@ class MainActivity : ComponentActivity(){
 
                     composable(Screen.ArticuloListScreen.route){
                         ArticuloListScreen({navController.navigateUp()})
+                    }
+
+                    composable(Screen.ArticuloScreen.route){
+                        ArticuloScreen({navController.navigateUp()})
                     }
 
 

@@ -34,7 +34,7 @@ fun ArticuloListScreen(
         horizontalAlignment = Alignment.CenterHorizontally) {
 
         Text(
-            text = "Consulta de prestamos",
+            text = "Api articulos",
             fontStyle = FontStyle.Normal,
             fontSize = 18.sp
         )
@@ -96,17 +96,25 @@ fun PrestamoRow(viewModel: ArticuloListViewModel, articulo: ArticuloResponse, on
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = articulo.descripcion)
+                Text(text = "Descripcion: ${articulo.descripcion}")
                 Text(
-                    text = "Balance: ${articulo.marca}"
+                    text = "Marca: ${articulo.marca}"
                 )
+                IconButton(onClick = { viewModel.deleteArticulos(articulo) }) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,contentDescription = "Add a Ocupacione"
+                    )
+                }
 
 
             }
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(text = "${articulo.existencia}  ${articulo.precio}")
+                Text(text = "Existencia: ${articulo.existencia}")
+                Text(text = "Precio: ${articulo.precio}")
             }
+
+
         }
      
 
